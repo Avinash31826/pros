@@ -1,0 +1,22 @@
+class Solution {
+public:
+
+    void solve(vector<int>& nums, int start, int sum,int target, vector<vector<int>>& res, vector<int>& curr){
+        if(sum == target){
+            res.push_back(curr);
+        }
+        if(start>nums.size())return;
+        for(int i=start;i<nums.size();i++){
+            if(sum + nums[i]>target)continue;
+            curr.push_back(nums[i]);
+            solve(nums, i,sum+nums[i],target,res,curr);
+            curr.pop_back();
+        }
+    }
+    vector<vector<int>> combinationSum(vector<int>& nums, int target) {
+        vector<vector<int>> res ;
+        vector<int> curr;
+        solve(nums, 0, 0, target, res,curr);
+        return res;
+    }
+};
