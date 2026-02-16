@@ -1,0 +1,34 @@
+def can_tomu_win(N, K, A):
+    # Motu picks indices 0,2,4,... ; Tomu picks 1,3,5,...
+    motu = A[::2]
+    tomu = A[1::2]
+
+    motu_sum = sum(motu)
+    tomu_sum = sum(tomu)
+
+    # Sort Motu's picks descending (largest values Motu currently has)
+    motu_sorted = sorted(motu, reverse=True)
+    # Sort Tomu's picks ascending (smallest values Tomu currently has)
+    tomu_sorted = sorted(tomu)
+
+    # Tomu can swap up to K times
+    swaps = min(K, min(len(motu_sorted), len(tomu_sorted)))
+
+    for i in range(swaps):
+        if motu_sorted[i] > tomu_sorted[i]:
+            # Perform swap: Tomu gains motu_sorted[i], loses tomu_sorted[i]
+            tomu_sum += motu_sorted[i] - tomu_sorted[i]
+            motu_sum += tomu_sorted[i] - motu_sorted[i]
+        else:
+            # No further beneficial swaps possible
+            break
+
+    return "YES" if tomu_sum > motu_sum else "NO"
+
+
+# Driver code
+T = int(input())
+for _ in range(T):
+    N, K = map(int, input().split())
+    A = list(map(int, input().split()))
+    print(can_tomu_win(N, K, A))

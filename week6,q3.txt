@@ -1,0 +1,13 @@
+import re
+
+# Read input
+n = int(input())
+lines = [input() for _ in range(n)]
+
+# Process each line
+for line in lines:
+    # Replace ' && ' with ' and '
+    line = re.sub(r'(?<= )&&(?= )', 'and', line)
+    # Replace ' || ' with ' or '
+    line = re.sub(r'(?<= )\|\|(?= )', 'or', line)
+    print(line)

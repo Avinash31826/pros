@@ -1,0 +1,9 @@
+import re
+
+def fun(s):
+    # Regex pattern based on rules:
+    # username: letters, digits, dashes, underscores
+    # website: letters, digits
+    # extension: letters only, length <= 3
+    pattern = r'^[\w-]+@[A-Za-z0-9]+\.[A-Za-z]{1,3}$'
+    return re.match(pattern, s) is not None
